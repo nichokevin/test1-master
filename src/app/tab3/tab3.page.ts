@@ -29,20 +29,6 @@ export class Tab3Page implements OnInit {
     await this.fotoService.loadFoto();
     this.tampilkanData();
   }
-  hapusFoto(){
-    var refImage = this.afStorage.storage.ref('imgStorage');
-    refImage.listAll()
-      .then((res) => {
-        res.items.forEach((itemRef) => {
-          itemRef.delete().then(() =>{
-            //menampilkan data
-            this.tampilkanData();
-          });
-        });
-      }).catch((error) => {
-        console.log(error);
-      });
-  }
 
   tampilkanData() {
     this.urlImageStorage=[];
@@ -59,17 +45,4 @@ export class Tab3Page implements OnInit {
     });
   }
 
-  uploadFoto(){
-    this.urlImageStorage=[];
-    for (var index in this.fotoService.dataFoto) {
-      const imgFilepath = `imgStorage/${this.fotoService.dataFoto[index].filePath}`;
-
-      this.afStorage.upload(imgFilepath, this.fotoService.dataFoto[index].dataImage).then(() => {
-        this.afStorage.storage.ref().child(imgFilepath).getDownloadURL().then((url) =>{
-          this.urlImageStorage.unshift(url)
-          console.log(url);
-        });
-      });
-    }
-  }
 }
