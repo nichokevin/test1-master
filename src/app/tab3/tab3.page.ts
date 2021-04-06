@@ -15,6 +15,7 @@ export interface fileFoto {
 export class Tab3Page implements OnInit {
 
   urlImageStorage : string[] = [];
+  namaFile : string[] = [];
 
   constructor(
     private afStorage : AngularFireStorage,
@@ -36,6 +37,7 @@ export class Tab3Page implements OnInit {
     refImage.listAll()
     .then ((res) => {
       res.items.forEach((itemRef) => {
+        this.namaFile.unshift(itemRef.name)
         itemRef.getDownloadURL().then(url => {
           this.urlImageStorage.unshift(url)
         })

@@ -10,7 +10,10 @@
   <ion-grid>
     <ion-row>
       <ion-col size="3" *ngFor="let iFoto of urlImageStorage;index as position">
-        <ion-img [src]="iFoto"></ion-img>
+        <div *ngFor="let nFoto of namaFile;index as position">
+          {{nFoto}}
+          <ion-img [src]="iFoto"></ion-img>
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
